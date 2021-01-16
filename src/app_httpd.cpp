@@ -572,7 +572,26 @@ void updateMotors()
     Serial.println(abs(current_speed_right) * 1023 * max_speed_right / 100);
     Serial.println(abs(current_speed_right) * 1023 * max_speed_left / 100);
 
-    // directions depends on whether speed is negative or positive
-    current_speed_left > 0 ? digitalWrite(MOTOR_L_DIR_PIN, HIGH) : digitalWrite(MOTOR_L_DIR_PIN, LOW);
-    current_speed_right > 0 ? digitalWrite(MOTOR_R_DIR_PIN, HIGH) : digitalWrite(MOTOR_R_DIR_PIN, LOW);
+     // directions depends on whether speed is negative or positive
+    if (current_speed_left > 0 )
+    {
+        digitalWrite(MOTOR_L_DIR_PIN, HIGH); 
+        digitalWrite(MOTOR_L_DIR2_PIN, LOW); 
+    }
+    else
+    { 
+        digitalWrite(MOTOR_L_DIR_PIN, LOW);
+        digitalWrite(MOTOR_L_DIR2_PIN, HIGH); 
+    }
+
+    if (current_speed_right > 0)
+    {
+         digitalWrite(MOTOR_R_DIR_PIN, HIGH);
+         digitalWrite(MOTOR_R_DIR2_PIN, LOW);
+    }
+    else 
+    {
+         digitalWrite(MOTOR_R_DIR_PIN, LOW);
+         digitalWrite(MOTOR_R_DIR2_PIN, HIGH);
+    }
 }
