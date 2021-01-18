@@ -181,6 +181,12 @@ void setup() {
   pinMode(MOTOR_R_DIR_PIN, OUTPUT);
   digitalWrite(MOTOR_R_DIR_PIN, LOW); 
 
+    pinMode(MOTOR_L_DIR2_PIN, OUTPUT);
+  digitalWrite(MOTOR_L_DIR2_PIN, LOW); 
+  
+  pinMode(MOTOR_R_DIR2_PIN, OUTPUT);
+  digitalWrite(MOTOR_R_DIR2_PIN, LOW); 
+
   // Feedback that hardware init is complete and we are now attempting to connect
   Serial.println("");
   Serial.print("Connecting to Wifi network: ");
