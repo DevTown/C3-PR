@@ -76,6 +76,21 @@ void flashLED(int flashtime);
 
 #include "SPIFFS.h"
 
+void listAllFiles(){
+ 
+  File root = SPIFFS.open("/");
+ 
+  File file = root.openNextFile();
+ 
+  while(file){
+ 
+      Serial.print("FILE: ");
+      Serial.println(file.name());
+ 
+      file = root.openNextFile();
+  }
+   Serial.println("EOF");
+}    
 
 void setup() {
   Serial.begin(115200);
@@ -89,6 +104,9 @@ void setup() {
 
   //init Filessytem for /data dir
   SPIFFS.begin(true);
+
+  listAllFiles();
+
 
 // If we have a notification LED set it to output
 #ifdef LED_PIN
@@ -137,11 +155,6 @@ void setup() {
     config.fb_count = 1;
   }
 
-#if defined(CAMERA_MODEL_ESP_EYE)
-  pinMode(13, INPUT_PULLUP);
-  pinMode(14, INPUT_PULLUP);
-#endif
-
   // camera init
   esp_err_t err = esp_camera_init(&config);
   if (err != ESP_OK) {
@@ -181,7 +194,7 @@ void setup() {
   pinMode(MOTOR_R_DIR_PIN, OUTPUT);
   digitalWrite(MOTOR_R_DIR_PIN, LOW); 
 
-    pinMode(MOTOR_L_DIR2_PIN, OUTPUT);
+  pinMode(MOTOR_L_DIR2_PIN, OUTPUT);
   digitalWrite(MOTOR_L_DIR2_PIN, LOW); 
   
   pinMode(MOTOR_R_DIR2_PIN, OUTPUT);
